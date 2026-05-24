@@ -1,0 +1,197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "My API",
+    "description": "Inventory Management API - Manage Suppliers and Products",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Root endpoint - Returns a welcome message for the API",
+        "responses": {
+          "200": {
+            "description": "OK - API is running successfully"
+          }
+        }
+      }
+    },
+    "/suppliers/": {
+      "post": {
+        "description": "Create a new supplier in the system",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "supplierName": { "example": "any" },
+                "contactPerson": { "example": "any" },
+                "email": { "example": "any" },
+                "phone": { "example": "any" },
+                "address": { "example": "any" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Created - Supplier successfully created" },
+          "400": { "description": "Bad Request - Missing required fields" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "get": {
+        "description": "Retrieve a list of all suppliers",
+        "responses": {
+          "200": { "description": "OK - List of suppliers returned successfully" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/suppliers/{id}": {
+      "put": {
+        "description": "Update an existing supplier by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Supplier ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "supplierName": { "example": "any" },
+                "contactPerson": { "example": "any" },
+                "email": { "example": "any" },
+                "phone": { "example": "any" },
+                "address": { "example": "any" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK - Supplier updated successfully" },
+          "400": { "description": "Bad Request - Invalid input" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "description": "Delete a supplier by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Supplier ID to delete"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK - Supplier deleted successfully" },
+          "400": { "description": "Bad Request - Invalid ID" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/products/": {
+      "post": {
+        "description": "Create a new product in the inventory",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productName": { "example": "any" },
+                "sku": { "example": "any" },
+                "price": { "example": "any" },
+                "category": { "example": "any" },
+                "quantityInStock": { "example": "any" },
+                "reorderLevel": { "example": "any" },
+                "description": { "example": "any" },
+                "supplierId": { "example": "any" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Created - Product successfully created" },
+          "400": { "description": "Bad Request - Missing required fields or invalid data" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "get": {
+        "description": "Retrieve a list of all products in the inventory",
+        "responses": {
+          "200": { "description": "OK - List of products returned successfully" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/products/{id}": {
+      "put": {
+        "description": "Update an existing product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productName": { "example": "any" },
+                "sku": { "example": "any" },
+                "price": { "example": "any" },
+                "category": { "example": "any" },
+                "quantityInStock": { "example": "any" },
+                "reorderLevel": { "example": "any" },
+                "description": { "example": "any" },
+                "supplierId": { "example": "any" }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK - Product updated successfully" },
+          "400": { "description": "Bad Request - Invalid input" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "description": "Delete a product by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product ID to delete"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK - Product deleted successfully" },
+          "400": { "description": "Bad Request - Invalid ID" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    }
+  }
+}
