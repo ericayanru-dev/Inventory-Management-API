@@ -10,7 +10,7 @@ router.post("/", validator.validateSupplier, supplierController.createSupplier);
 
 router.get("/", supplierController.getAllSuppliers);
 
-router.put("/:id", validator.validateSupplier, supplierController.updateSupplier);
+router.put("/:id", supplierController.updateSupplier);
 
 router.delete("/:id", supplierController.deleteSupplier);
 
