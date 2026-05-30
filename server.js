@@ -4,12 +4,16 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const swaggerUi = require('swagger-ui-express');
+const cookie = require("cookie-parser");
 
 
 const swaggerDocument = require('./swagger.json');
 const supplier = require("./routes/supplier-routes");
 const products = require("./routes/product-routes");
 const connectDB = require("./db-connection/mongodb-connection");
+const authRoutes = require("./routes/user");
+const passport = require('./config/passport');
+const githubAuthRoutes = require('./routes/git-auth-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +21,10 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(cookie());
+
+// Initialize Passport
+app.use(passport.initialize());
 
 // Routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -25,9 +33,10 @@ app.get("/", (req, res) => {
 });
 
 // Use the routes
+app.use("/auth", authRoutes);
 app.use("/suppliers", supplier);
 app.use("/products", products);
-
+app.use("/github", githubAuthRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

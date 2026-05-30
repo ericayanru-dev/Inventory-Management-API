@@ -5,7 +5,7 @@ const supplierController = {};
 
 supplierController.createSupplier = async (req, res) => {
   try {
-    const { supplierName, contactPerson, email, phone, address } = req.body;
+    const { supplierName, contactPerson, email, phone, address, userId } = req.body;
 
     if (!supplierName || !contactPerson || !email || !phone || !address) {
       return res.status(400).json({ message: "All fields are required" });
@@ -16,6 +16,7 @@ supplierController.createSupplier = async (req, res) => {
       email: email.toLowerCase().trim(),
       phone: phone.trim(),
       address: address.trim(),
+      user: userId
     });
     res.status(201).json(result);
   } catch (error) {
@@ -39,7 +40,7 @@ supplierController.getAllSuppliers = async (req, res) => {
 supplierController.updateSupplier = async (req, res) => {
   try {
     const { id } = req.params;
-    const { supplierName, contactPerson, email, phone, address } = req.body;
+    const { supplierName, contactPerson, email, phone, address} = req.body;
     if (!id) {
       return res.status(400).json({ message: "Supplier ID is required" });
     }

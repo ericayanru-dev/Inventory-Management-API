@@ -1,13 +1,18 @@
+'use strict'
+
 const express = require("express");
 const router = express.Router();
-const productController = require("../controllers/product-controller");
 
 const validator = require("../middleware/validator");
+const authMiddleware = require("../middleware/auth");
+const productController = require("../controllers/product-controller");
 
-// Create a new product
-router.post("/", validator.validateProduct, productController.createProduct);
+// Protected routes (require login)
+router.post("/", authMiddleware, validator.validateProduct, productController.createProduct);
+router.put("/:id", authMiddleware,  productController.updateProduct);
+router.delete("/:id", authMiddleware, productController.deleteProduct);
+
+
 router.get("/", productController.getAllProducts);
-router.put("/:id", productController.updateProduct);
-router.delete("/:id", productController.deleteProduct);
 
 module.exports = router;

@@ -2,24 +2,123 @@
   "swagger": "2.0",
   "info": {
     "title": "My API",
-    "description": "Inventory Management API - Manage Suppliers and Products",
+    "description": "Description",
     "version": "1.0.0"
   },
-  
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
-        "description": "Root endpoint - Returns a welcome message for the API",
+        "description": "",
         "responses": {
           "200": {
-            "description": "OK - API is running successfully"
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/users": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/suppliers/": {
       "post": {
-        "description": "Create a new supplier in the system",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -27,39 +126,64 @@
             "schema": {
               "type": "object",
               "properties": {
-                "supplierName": { "example": "any" },
-                "contactPerson": { "example": "any" },
-                "email": { "example": "any" },
-                "phone": { "example": "any" },
-                "address": { "example": "any" }
+                "supplierName": {
+                  "example": "any"
+                },
+                "contactPerson": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                },
+                "userId": {
+                  "example": "any"
+                }
               }
             }
           }
         ],
         "responses": {
-          "201": { "description": "Created - Supplier successfully created" },
-          "400": { "description": "Bad Request - Missing required fields" },
-          "500": { "description": "Internal Server Error" }
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "get": {
-        "description": "Retrieve a list of all suppliers",
+        "description": "",
         "responses": {
-          "200": { "description": "OK - List of suppliers returned successfully" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
     "/suppliers/{id}": {
       "put": {
-        "description": "Update an existing supplier by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Supplier ID"
+            "type": "string"
           },
           {
             "name": "body",
@@ -67,42 +191,69 @@
             "schema": {
               "type": "object",
               "properties": {
-                "supplierName": { "example": "any" },
-                "contactPerson": { "example": "any" },
-                "email": { "example": "any" },
-                "phone": { "example": "any" },
-                "address": { "example": "any" }
+                "supplierName": {
+                  "example": "any"
+                },
+                "contactPerson": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "address": {
+                  "example": "any"
+                }
               }
             }
           }
         ],
         "responses": {
-          "200": { "description": "OK - Supplier updated successfully" },
-          "400": { "description": "Bad Request - Invalid input" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "delete": {
-        "description": "Delete a supplier by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Supplier ID to delete"
+            "type": "string"
           }
         ],
         "responses": {
-          "200": { "description": "OK - Supplier deleted successfully" },
-          "400": { "description": "Bad Request - Invalid ID" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
     "/products/": {
       "post": {
-        "description": "Create a new product in the inventory",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -110,42 +261,70 @@
             "schema": {
               "type": "object",
               "properties": {
-                "productName": { "example": "any" },
-                "sku": { "example": "any" },
-                "price": { "example": "any" },
-                "category": { "example": "any" },
-                "quantityInStock": { "example": "any" },
-                "reorderLevel": { "example": "any" },
-                "description": { "example": "any" },
-                "supplierId": { "example": "any" }
+                "productName": {
+                  "example": "any"
+                },
+                "sku": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "category": {
+                  "example": "any"
+                },
+                "quantityInStock": {
+                  "example": "any"
+                },
+                "reorderLevel": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "supplierId": {
+                  "example": "any"
+                }
               }
             }
           }
         ],
         "responses": {
-          "201": { "description": "Created - Product successfully created" },
-          "400": { "description": "Bad Request - Missing required fields or invalid data" },
-          "500": { "description": "Internal Server Error" }
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "get": {
-        "description": "Retrieve a list of all products in the inventory",
+        "description": "",
         "responses": {
-          "200": { "description": "OK - List of products returned successfully" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     },
     "/products/{id}": {
       "put": {
-        "description": "Update an existing product by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Product ID"
+            "type": "string"
           },
           {
             "name": "body",
@@ -153,39 +332,92 @@
             "schema": {
               "type": "object",
               "properties": {
-                "productName": { "example": "any" },
-                "sku": { "example": "any" },
-                "price": { "example": "any" },
-                "category": { "example": "any" },
-                "quantityInStock": { "example": "any" },
-                "reorderLevel": { "example": "any" },
-                "description": { "example": "any" },
-                "supplierId": { "example": "any" }
+                "productName": {
+                  "example": "any"
+                },
+                "sku": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "category": {
+                  "example": "any"
+                },
+                "quantityInStock": {
+                  "example": "any"
+                },
+                "reorderLevel": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "supplierId": {
+                  "example": "any"
+                }
               }
             }
           }
         ],
         "responses": {
-          "200": { "description": "OK - Product updated successfully" },
-          "400": { "description": "Bad Request - Invalid input" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "delete": {
-        "description": "Delete a product by ID",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Product ID to delete"
+            "type": "string"
           }
         ],
         "responses": {
-          "200": { "description": "OK - Product deleted successfully" },
-          "400": { "description": "Bad Request - Invalid ID" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/github/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       }
     }
