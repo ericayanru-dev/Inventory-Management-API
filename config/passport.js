@@ -3,7 +3,7 @@
 require("dotenv").config();
 const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
-const gitUser = require("../models/User");
+const gitUser = require("../models/user");
 
 passport.use(
   new GitHubStrategy(
