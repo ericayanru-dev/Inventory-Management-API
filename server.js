@@ -16,6 +16,7 @@ const passport = require('./config/passport');
 const githubAuthRoutes = require('./routes/git-auth-routes');
 
 const app = express();
+app.enable("trust proxy"); // Enable if behind a proxy (e.g., Heroku, Nginx)
 const PORT = process.env.PORT || 3000;
 
 // Middleware
